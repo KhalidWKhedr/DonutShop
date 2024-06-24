@@ -1,0 +1,10 @@
+<h1>All Donuts</h1>
+<ul>
+    <% donuts.forEach(donut => { %>
+        <li>
+            <h2><%= donut.donutName %></h2>
+            <p>Price: $<%= donut.donutPrice.toFixed(2) %></p>
+            <p>Description: <%= donut.donutDescription %></p>
+        </li>
+    <% }); %>
+</ul>
