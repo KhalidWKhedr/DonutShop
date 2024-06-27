@@ -38,4 +38,24 @@ router.get('/main-page/login-form', (req, res) => {
     });
 });
 
+router.post('/main-page/login-form', validateUser, handleValidationErrors, ({ body: { IDENTIFIER, PASSWORD } }, res) => {
+    console.log('POST /login endpoint accessed');
+    console.log(IDENTIFIER)
+    // Call UserService method to authenticate user
+    UserService.authenticateUser({IDENTIFIER}, (err, user) => {
+        if (err || !user) {
+            return handleAuthError(err, res); // Handle error or invalid credentials
+        }
+
+        // If authentication successful, return success message and user details
+        console.log({ message: 'Login successful', user });
+        res.redirect('/main-page');
+    });
+});
+
+// Helper function to handle authentication errors
+function handleAuthError(err, res) {
+    return res.status(401).json({ error: 'Invalid credentials' });
+}
+
 module.exports = router;
