@@ -28,7 +28,15 @@ class DonutModule {
                 DonutValidator.validateQuantity(donut);
                 DonutValidator.validateDescription(donut);
                 DonutValidator.validateImagePath(donut);
-                console.log(`Donut ${donut.donuts} is valid.`);
+                DonutValidator.validateQuantity(donut);
+
+                console.log(`Donut Name: ${donut.DONUT_NAME}`);
+                console.log(`Donut Flavor: ${donut.DONUT_FLAVOR}`);
+                console.log(`Donut Price: ${donut.DONUT_PRICE}`);
+                console.log(`Donut Quantity: ${donut.DONUT_QUANTITY}`);
+                console.log(`Donut Description: ${donut.DONUT_DESCRIPTION}`);
+                console.log(`Donut Image Path: ${donut.DONUT_IMAGE_PATH}`);
+                console.log('---------------------------');
             });
             return true; // All donuts passed validation
         } catch (error) {

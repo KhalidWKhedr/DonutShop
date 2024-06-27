@@ -22,8 +22,15 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 // Route to serve main-page.html
 app.get('/main-page', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'main-page.html'));
-  console.log('GET /main-page endpoint accessed');
+  const filePath = path.resolve(__dirname, 'client', 'main-page.html');
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error('Error sending file:', err);
+      res.status(err.status).end();
+    } else {
+      console.log('Sent:', filePath);
+    }
+  });
 });
 
 // Use userRoutes and donutRoutes
@@ -34,3 +41,4 @@ app.use(donutRoutes);
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/main-page.html`);
 });
+//5555555555554444
