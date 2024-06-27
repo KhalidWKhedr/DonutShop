@@ -17,19 +17,16 @@ class UserService {
         });
     }
 
-    static findUser(userData, callback) {
-        const { error } = UserModel.validate(userData);
-        if (error) {
-            return callback(new Error(error.details[0].message), null);
-        }
-
-        userRepository.findUser(userData, (err, results) => {
+    static authenticateUser(loginData, callback) {
+        UserRepository.findUser(loginData, (err, user) => {
             if (err) {
                 return callback(err, null);
             }
-            callback(null, results);
+            if (!user || user.password !== loginData.password) {
+                return callback(null, null); // Invalid credentials
+            }
+            callback(null, user); // Authentication successful
         });
     }
 }
-
 module.exports = UserService;
