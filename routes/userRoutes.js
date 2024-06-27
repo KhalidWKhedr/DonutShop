@@ -27,7 +27,7 @@ router.post('/main-page/submit-form', validateUser, handleValidationErrors, (req
     });
 });
 
-router.post('/main-page/login-form', validateUser, handleValidationErrors, (req, res) => {
+router.get('/main-page/login-form', (req, res) => {
     const filePath = path.join(__dirname, '..', 'views', 'login-form.html');
     console.log(`Resolved file path for login-form: ${filePath}`);
     res.sendFile(filePath, (err) => {

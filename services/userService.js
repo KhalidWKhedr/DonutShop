@@ -18,7 +18,7 @@ class UserService {
     }
 
     static authenticateUser(loginData, callback) {
-        UserRepository.findUser(loginData, (err, user) => {
+        userRepository.findUser(loginData, (err, user) => {
             if (err) {
                 return callback(err, null);
             }
