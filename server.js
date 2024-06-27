@@ -10,27 +10,20 @@ const PORT = process.env.PORT || 3000;
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'client', 'views')); // Set path to 'public/views'
+app.set('views', path.join(__dirname, 'views'));
+
+// Set static directory for serving HTML, CSS, JS, and images
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware to parse JSON and urlencoded bodies
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-// Set static directory for serving HTML, CSS, JS, and images
-app.use(express.static(path.join(__dirname, 'client')));
 
 // Route to serve main-page.html
 app.get('/main-page', (req, res) => {
-  const filePath = path.resolve(__dirname, 'client', 'main-page.html');
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      console.error('Error sending file:', err);
-      res.status(err.status).end();
-    } else {
-      console.log('Sent:', filePath);
-    }
-  });
+  res.sendFile(path.join(__dirname, 'views', 'main-page.html'));
 });
 
 // Use userRoutes and donutRoutes
