@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Set static directory for serving HTML, CSS, JS, and images
+// Serve static files from the 'public' directory for CSS, JS, and images
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware to parse JSON and urlencoded bodies
@@ -22,7 +22,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Route to serve main-page.html
 app.get('/main-page', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'main-page.html'));
+  const filePath = path.join(__dirname, 'views', 'main-page.html');
+  console.log(`Serving main-page.html from: ${filePath}`);
+  res.sendFile(filePath);
 });
 
 // Use userRoutes and donutRoutes

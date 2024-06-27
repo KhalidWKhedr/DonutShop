@@ -31,7 +31,6 @@ function createModal(html) {
     modal.style.display = "flex";
 }
 
-// Function to fetch HTML content from a file
 function fetchForm(url, cssFile) {
     fetch(url)
         .then(response => response.text())
@@ -57,9 +56,9 @@ const loginBtn = document.getElementById("logIn");
 
 // When the user clicks the button, open the corresponding modal
 signupBtn.onclick = function() {
-    fetchForm('./signup-form.html', ',/assets/css/modal-form.css');
+    fetchForm('/main-page/signup-form', '/assets/css/modal-form.css');
 }
 
 loginBtn.onclick = function() {
-    fetchForm('./login-form.html', './assets/css/modal-form.css');
+    fetchForm('/main-page/login-form', '/assets/css/modal-form.css');
 }

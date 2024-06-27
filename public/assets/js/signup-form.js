@@ -1,5 +1,5 @@
 function loadForm() {
-    fetch('./signup-form.html')
+    fetch('/main-page/signup-form.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
