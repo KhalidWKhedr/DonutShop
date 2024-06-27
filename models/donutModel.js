@@ -1,5 +1,4 @@
-// donutModule.js
-
+// models/donutModel.js
 const DonutRepository = require('../repository/donutRepository');
 const DonutValidator = require('../middlewares/donutValidator'); // Import DonutValidator class
 
