@@ -5,8 +5,8 @@ class UserRepository {
     static createUser(userData, callback) {
         const newUser = userData;
 
-        const query = 'INSERT INTO CUSTOMER (F_NAME, L_NAME, EMAIL, ADDRESS, NUMBER, ZIP_CODE, CC_NUMBER, DOB) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-        const values = [newUser.F_NAME, newUser.L_NAME, newUser.EMAIL, newUser.ADDRESS, newUser.NUMBER, newUser.ZIP_CODE, newUser.CC_NUMBER, newUser.DOB];
+        const query = 'INSERT INTO ACCOUNTS (EMAIL, PASSWORD) VALUES (?, ?)';
+        const values = [newUser.EMAIL, newUser.PASSWORD];
 
         connection.query(query, values, (err, results) => {
             if (err) {
