@@ -17,20 +17,17 @@ class UserRepository {
             callback(null, results);
         });
     }
-    static getUser(userData, callback) {
-        const getUser = userData;
+    static findUser(callback) {
 
-        const getUserQuery = 'SELECT * FROM ACCOUNTS WHERE ACCOUNTS.EMAIL = getUser'
-
-        const query = 'INSERT INTO ACCOUNTS (EMAIL, PASSWORD) VALUES (?, ?)';
+        const getUserQuery = 'SELECT * FROM ACCOUNTS WHERE ACCOUNTS.EMAIL = ? OR ACCOUNTS.NUMBER = ?';
         const values = [newUser.EMAIL, newUser.PASSWORD];
 
-        connection.query(query, values, (err, results) => {
+        connection.query(getUserQuery, values, (err, results) => {
             if (err) {
-                console.error('Error creating user:', err);
+                console.error('Error getting user:', err);
                 return callback(err, null);
             }
-            console.log('User created successfully');
+            console.log('User fetched successfully');
             callback(null, results);
         });
     }

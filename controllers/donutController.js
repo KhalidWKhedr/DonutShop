@@ -1,5 +1,4 @@
-// donutController.js
-
+// controllers/donutController.js
 const DonutModule = require('../models/donutModel');
 
 const fetchDonuts = (req, res) => {
@@ -12,7 +11,7 @@ const fetchDonuts = (req, res) => {
         }
 
         // Validate donuts after fetching
-        const isValid = donutModuleInstance.validateDonuts(donuts);
+        const isValid = donutModuleInstance.validateDonuts();
         if (!isValid) {
             return res.status(400).json({ error: 'Validation error' });
         }
