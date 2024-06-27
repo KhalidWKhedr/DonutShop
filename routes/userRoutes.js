@@ -38,16 +38,15 @@ router.get('/main-page/login-form', (req, res) => {
     });
 });
 
-router.post('/main-page/login-form', validateUser, handleValidationErrors, ({ body: { IDENTIFIER, PASSWORD } }, res) => {
-    console.log('POST /login endpoint accessed');
-    console.log(IDENTIFIER)
+router.post('/main-page/login-form', validateUser, handleValidationErrors, (req, res) => {
+    const { IDENTIFIER, PASSWORD } = req.body;
+
     // Call UserService method to authenticate user
-    UserService.authenticateUser({IDENTIFIER}, (err, user) => {
+    UserService.authenticateUser(IDENTIFIER, PASSWORD, (err, user) => {
         if (err || !user) {
             return handleAuthError(err, res); // Handle error or invalid credentials
         }
 
-        // If authentication successful, return success message and user details
         console.log({ message: 'Login successful', user });
         res.redirect('/main-page');
     });

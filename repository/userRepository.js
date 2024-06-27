@@ -1,6 +1,5 @@
 // repository/userRepository.js
 const connection = require('../config/database');
-const {NULL} = require("mysql/lib/protocol/constants/types");
 
 class UserRepository {
     static createUser(userData, callback) {
@@ -19,10 +18,10 @@ class UserRepository {
         });
     }
 
-    static authenticateUser(identifier, callback) {
-        console.log('Identifier to query:', identifier.IDENTIFIER); // Check what is being passed to the query
+    static getUser(identifier, callback) {
+        console.log('Identifier to query:', identifier); // Check what is being passed to the query
         const getUserQuery = 'SELECT * FROM ACCOUNTS WHERE ACCOUNTS.IDENTIFIER = ?';
-        connection.query(getUserQuery, identifier.IDENTIFIER, (err, results) => {
+        connection.query(getUserQuery, identifier, (err, results) => {
             if (err) {
                 console.error('Error getting user:', err);
                 return callback(err, null); // Handle database error

@@ -5,33 +5,18 @@ const userService = require('../services/userService');
 class UserController {
     static createUser(req, res) {
         // Validate user data
-        const { error } = UserModel.validate(req.body);
+        const {error} = UserModel.validate(req.body);
         if (error) {
-            return res.status(400).json({ error: error.details[0].message });
+            return res.status(400).json({error: error.details[0].message});
         }
 
         userService.createUser(req.body, (err, results) => {
             if (err) {
-                return res.status(400).json({ error: err.message });
+                return res.status(400).json({error: err.message});
             }
-            res.status(201).json({ message: 'User created successfully', data: results });
+            res.status(201).json({message: 'User created successfully', data: results});
         });
-    }
-
-    static findUser(req, res) {
-        // Validate user data
-        const { error } = UserModel.validate(req.body);
-        if (error) {
-            return res.status(400).json({ error: error.details[0].message });
-        }
-
-        userService.findUser(req.body, (err, results) => {
-            if (err) {
-                return res.status(400).json({ error: err.message });
-            }
-            res.status(200).json({ message: 'User found successfully', data: results });
-        });
-    }
+    };
 }
 
 module.exports = UserController;
