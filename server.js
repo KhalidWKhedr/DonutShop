@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'client', 'views')); // Set path to 'client/views'
+app.set('views', path.join(__dirname, 'client', 'views')); // Set path to 'public/views'
 
 // Middleware to parse JSON and urlencoded bodies
 app.use(cors()); // Enable CORS for all routes

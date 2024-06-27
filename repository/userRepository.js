@@ -17,6 +17,23 @@ class UserRepository {
             callback(null, results);
         });
     }
+    static getUser(userData, callback) {
+        const getUser = userData;
+
+        const getUserQuery = 'SELECT * FROM ACCOUNTS WHERE ACCOUNTS.EMAIL = getUser'
+
+        const query = 'INSERT INTO ACCOUNTS (EMAIL, PASSWORD) VALUES (?, ?)';
+        const values = [newUser.EMAIL, newUser.PASSWORD];
+
+        connection.query(query, values, (err, results) => {
+            if (err) {
+                console.error('Error creating user:', err);
+                return callback(err, null);
+            }
+            console.log('User created successfully');
+            callback(null, results);
+        });
+    }
 }
 
 module.exports = UserRepository;
