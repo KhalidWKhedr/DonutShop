@@ -20,7 +20,6 @@ app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-
 // Route to serve main-page.html
 app.get('/main-page', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'main-page.html'));
@@ -32,6 +31,7 @@ app.use(donutRoutes);
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/main-page.html`);
+  console.log(`Server running at http://localhost:${PORT}/main-page`);
 });
+
 //5555555555554444
