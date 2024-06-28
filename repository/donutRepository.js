@@ -23,12 +23,15 @@ class DonutRepository {
     static increasePrice(callback){
 
     }
+    static decreasePrice(callback){
+
+    }
     static deleteDonut(callback){
 
     }
     static addDonut(callback){
-
     }
+
 }
 
 module.exports = DonutRepository;
