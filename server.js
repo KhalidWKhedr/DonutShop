@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware to parse JSON and urlencoded bodies
 app.use(cors()); // Enable CORS for all routes
-app.use(bodyParser.json()); // Parse JSON bodies
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Route to serve main-page.html

@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const UserService = require('../services/userService');
-const { validateUser, handleValidationErrors } = require('../middlewares/signupValidator');
+const userController = require('../controllers/userController');
 
 // Serve signup form
 router.get('/main-page/signup-form', (req, res) => {
@@ -16,17 +15,10 @@ router.get('/main-page/signup-form', (req, res) => {
     });
 });
 
-// Endpoint to handle form submission with validation
-router.post('/main-page/submit-form', validateUser, handleValidationErrors, (req, res) => {
-    console.log('POST /submit-form endpoint accessed');
-    UserService.createUser(req.body, (err, results) => {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-        res.json({ message: 'User created successfully', user: results });
-    });
-});
+// Endpoint to handle user creation form submission with validation
+router.post('/main-page/submit-form', userController.createUser);
 
+// Serve login form
 router.get('/main-page/login-form', (req, res) => {
     const filePath = path.join(__dirname, '..', 'views', 'login-form.html');
     console.log(`Resolved file path for login-form: ${filePath}`);
@@ -38,23 +30,7 @@ router.get('/main-page/login-form', (req, res) => {
     });
 });
 
-router.post('/main-page/login-form', validateUser, handleValidationErrors, (req, res) => {
-    const { IDENTIFIER, PASSWORD } = req.body;
-
-    // Call UserService method to authenticate user
-    UserService.authenticateUser(IDENTIFIER, PASSWORD, (err, user) => {
-        if (err || !user) {
-            return handleAuthError(err, res); // Handle error or invalid credentials
-        }
-
-        console.log({ message: 'Login successful', user });
-        res.redirect('/main-page');
-    });
-});
-
-// Helper function to handle authentication errors
-function handleAuthError(err, res) {
-    return res.status(401).json({ error: 'Invalid credentials' });
-}
+// Handle login form submission with validation
+router.post('/main-page/login-form', userController.authenticateUser);
 
 module.exports = router;
