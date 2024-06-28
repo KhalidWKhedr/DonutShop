@@ -30,12 +30,12 @@ class UserRepository {
         connection.query(getUserQuery, identifier, (err, results) => {
             if (err) {
                 console.error('Error getting user:', err);
-                return callback(err, null); // Handle database error
+                return callback(err, null, Error("Idk man goodluck.")); // Handle database error
             }
 
             if (results.length === 0) {
                 console.log('User not found');
-                return callback(null, null); // User not found
+                return callback(null, null, Error("User doesn't exist.")); // User not found
             }
 
             console.log('User fetched successfully');
