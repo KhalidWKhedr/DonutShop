@@ -1,16 +1,16 @@
-// controllers/donutController.js
 const DonutService = require('../services/donutService');
 
 class DonutController {
-    static getDonuts(req, res) {
+    getDonuts(req, res) {
         DonutService.getDonuts()
             .then(donuts => {
-                res.status(200).json(donuts);
+                res.locals.donuts = donuts;
+                res.render('donuts', { donuts });
             })
             .catch(error => {
-                res.status(500).json({ error: error.message });
+                res.status(500).send('Error fetching donuts: ' + error.message);
             });
     }
 }
 
-module.exports = DonutController;
+module.exports = new DonutController();
