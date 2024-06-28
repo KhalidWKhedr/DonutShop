@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            padding: 32px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            width: 25%;
+            padding: 10px;
+        }
+
+        .column > div {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .column img {
+            width: 100%;
+            height: 200px; /* Adjust as needed for uniform image height */
+            object-fit: cover; /* Ensure images maintain aspect ratio */
+        }
+
+        .column button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .column {
+                width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h1>Image Grid</h1>
+</div>
+
+<!-- Photo Grid -->
+<div class="row">
+    <div class="column">
+        <div>
+            <img src="/w3images/wedding.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/rocks.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/falls2.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/paris.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/nature.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/mist.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/paris.jpg">
+            <button>Add to Cart</button>
+        </div>
+    </div>
+    <div class="column">
+        <div>
+            <img src="/w3images/underwater.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/ocean.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/wedding.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/mountainskies.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/rocks.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/underwater.jpg">
+            <button>Add to Cart</button>
+        </div>
+    </div>
+    <div class="column">
+        <div>
+            <img src="/w3images/wedding.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/rocks.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/falls2.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/paris.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/nature.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/mist.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/paris.jpg">
+            <button>Add to Cart</button>
+        </div>
+    </div>
+    <div class="column">
+        <div>
+            <img src="/w3images/underwater.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/ocean.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/wedding.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/mountainskies.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/rocks.jpg">
+            <button>Add to Cart</button>
+        </div>
+        <div>
+            <img src="/w3images/underwater.jpg">
+            <button>Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

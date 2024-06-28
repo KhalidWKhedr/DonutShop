@@ -2,8 +2,8 @@
 const DonutService = require('../services/donutService');
 
 class DonutController {
-    static fetchDonuts(req, res) {
-        DonutService.fetchDonuts()
+    static getDonuts(req, res) {
+        DonutService.getDonuts()
             .then(donuts => {
                 res.status(200).json(donuts);
             })

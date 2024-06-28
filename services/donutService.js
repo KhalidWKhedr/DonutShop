@@ -2,9 +2,9 @@ const DonutRepository = require('../repository/donutRepository');
 const donutModel = require('../models/donutModel');
 
 class DonutService {
-    static fetchDonuts() {
+    static getDonuts() {
         return new Promise((resolve, reject) => {
-            DonutRepository.fetchDonuts((err, donuts) => {
+            DonutRepository.getDonuts((err, donuts) => {
                 if (err) {
                     return reject(err);
                 }

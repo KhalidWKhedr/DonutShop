@@ -2,7 +2,8 @@
 const connection = require('../config/database');
 
 class UserRepository {
-    static createUser(signupIdentifier, signupPassword, callback) {
+
+    static newUser(signupIdentifier, signupPassword, callback) {
 
         const query = 'INSERT INTO ACCOUNTS (IDENTIFIER, PASSWORD) VALUES (?, ?)';
         const values = [signupIdentifier,signupPassword];
@@ -17,7 +18,7 @@ class UserRepository {
         });
     }
 
-    static getUser(identifier, callback) {
+    static getUserLogin(identifier, callback) {
         console.log('Identifier to query:', identifier); // Check what is being passed to the query
         const getUserQuery = 'SELECT * FROM ACCOUNTS WHERE ACCOUNTS.IDENTIFIER = ?';
         connection.query(getUserQuery, identifier, (err, results) => {

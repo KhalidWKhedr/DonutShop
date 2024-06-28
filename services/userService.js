@@ -2,12 +2,12 @@ const userRepository = require('../repository/userRepository');
 const userModel = require('../models/userModel');
 
 class UserService {
-    static createUser(signupIdentifier, signupPassword, callback) {
+    static newUser(signupIdentifier, signupPassword, callback) {
         const { error } = userModel.validate({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
         if (error) {
             return callback(new Error(error.details[0].message), null);
         }
-        userRepository.createUser(signupIdentifier, signupPassword, (err, results) => {
+        userRepository.newUser(signupIdentifier, signupPassword, (err, results) => {
             if (err) {
                 return callback(err, null);
             }
@@ -26,7 +26,7 @@ class UserService {
         }
 
         // Call userRepository or database layer to authenticate user
-        userRepository.getUser(identifier, (err, results) => {
+        userRepository.getUserLogin(identifier, (err, results) => {
             if (err) {
                 return callback(err, null);
             }

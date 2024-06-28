@@ -1,10 +1,10 @@
 const userService = require('../services/userService');
 
 class UserController {
-    static createUser(req, res) {
+    static newUser(req, res) {
         const { SIGNUPIDENTIFIER, SIGNUPPASSWORD } = req.body;
         console.log(req.body); // For debugging purposes
-        userService.createUser(SIGNUPIDENTIFIER, SIGNUPPASSWORD, (err, results) => {
+        userService.newUser(SIGNUPIDENTIFIER, SIGNUPPASSWORD, (err, results) => {
             if (err) {
                 return res.status(400).json({ error: err.message });
             }

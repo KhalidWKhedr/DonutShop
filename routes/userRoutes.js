@@ -16,7 +16,7 @@ router.get('/main-page/signup-form', (req, res) => {
 });
 
 // Endpoint to handle user creation form submission with validation
-router.post('/main-page/submit-form', userController.createUser);
+router.post('/main-page/submit-form', userController.newUser);
 
 // Serve login form
 router.get('/main-page/login-form', (req, res) => {

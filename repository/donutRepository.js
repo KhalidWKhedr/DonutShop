@@ -2,7 +2,7 @@
 const connection = require('../config/database');
 
 class DonutRepository {
-    static fetchDonuts(callback) {
+    static getDonuts(callback) {
         const donutQuery = 'SELECT * FROM DONUTS';
 
         connection.query(donutQuery, (err, results) => {
