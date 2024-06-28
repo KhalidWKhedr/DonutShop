@@ -1,6 +1,12 @@
 // donutValidator.js
 
 class DonutValidator {
+    static ValidateID(donut) {
+        if (!donut.DONUT_ID) {
+            throw new Error('Donut ID is required.');
+        }
+        // Additional validation logic for ID if needed
+    }
     static validateFlavor(donut) {
         if (!donut.DONUT_FLAVOR) {
             throw new Error('Donut flavor is required.');

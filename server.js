@@ -37,3 +37,5 @@ app.listen(PORT, () => {
 });
 
 //5555555555554444
+
+// Service layer has both model and repo. This handles buisness logic.

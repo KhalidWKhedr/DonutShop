@@ -1,48 +1,46 @@
 // models/donutModel.js
-const DonutRepository = require('../repository/donutRepository');
-const DonutValidator = require('../middlewares/donutValidator'); // Import DonutValidator class
+const Joi = require('joi');
+const DonutValidator = require('../middlewares/donutValidator');
 
-class DonutModule {
-    constructor() {
-        this.donuts = []; // Initialize donuts property
+// Define Joi schema for donut data validation
+const donutSchema = Joi.object({
+    DONUT_ID: Joi.number().required(),
+    DONUT_NAME: Joi.string().required(),
+    DONUT_FLAVOR: Joi.string().required(),
+    DONUT_PRICE: Joi.number().required(),
+    DONUT_QUANTITY: Joi.number().integer().min(0).required(),
+    DONUT_DESCRIPTION: Joi.string().required(),
+    DONUT_IMAGE_PATH: Joi.string().required()
+});
+
+class DonutModel {
+    constructor(donutData) {
+        this.DONUT_ID = donutData.DONUT_ID
+        this.DONUT_NAME = donutData.DONUT_NAME;
+        this.DONUT_FLAVOR = donutData.DONUT_FLAVOR;
+        this.DONUT_PRICE = donutData.DONUT_PRICE;
+        this.DONUT_QUANTITY = donutData.DONUT_QUANTITY;
+        this.DONUT_DESCRIPTION = donutData.DONUT_DESCRIPTION;
+        this.DONUT_IMAGE_PATH = donutData.DONUT_IMAGE_PATH;
     }
 
-    fetchDonuts(callback) {
-        DonutRepository.fetchDonuts((err, donuts) => {
-            if (err) {
-                console.error('Error fetching donuts:', err);
-                callback(err); // Pass error to callback
-            } else {
-                this.donuts = donuts; // Assign fetched donuts to instance property
-                callback(null, donuts); // Pass fetched donuts to callback
-            }
-        });
-    }
-
-    validateDonuts() {
-        try {
-            this.donuts.forEach((donut) => {
-                DonutValidator.validateFlavor(donut);
-                DonutValidator.validatePrice(donut);
-                DonutValidator.validateQuantity(donut);
-                DonutValidator.validateDescription(donut);
-                DonutValidator.validateImagePath(donut);
-                DonutValidator.validateQuantity(donut);
-
-                console.log(`Donut Name: ${donut.DONUT_NAME}`);
-                console.log(`Donut Flavor: ${donut.DONUT_FLAVOR}`);
-                console.log(`Donut Price: ${donut.DONUT_PRICE}`);
-                console.log(`Donut Quantity: ${donut.DONUT_QUANTITY}`);
-                console.log(`Donut Description: ${donut.DONUT_DESCRIPTION}`);
-                console.log(`Donut Image Path: ${donut.DONUT_IMAGE_PATH}`);
-                console.log('---------------------------');
-            });
-            return true; // All donuts passed validation
-        } catch (error) {
-            console.error('Validation error:', error.message);
-            return false; // Validation failed
+    static validate(donutData) {
+        // Joi validation
+        const { error } = donutSchema.validate(donutData);
+        if (error) {
+            throw new Error(`Validation error: ${error.details[0].message}`);
         }
+
+        // Custom validation using DonutValidator
+        DonutValidator.ValidateID(donutData)
+        DonutValidator.validateFlavor(donutData);
+        DonutValidator.validatePrice(donutData);
+        DonutValidator.validateQuantity(donutData);
+        DonutValidator.validateDescription(donutData);
+        DonutValidator.validateImagePath(donutData);
+
+        return true; // If all validations pass
     }
 }
 
-module.exports = DonutModule;
+module.exports = DonutModel;
