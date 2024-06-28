@@ -10,8 +10,14 @@ class UserRepository {
 
         connection.query(query, values, (err, results) => {
             if (err) {
-                console.error('Error creating user:', err);
-                return callback(err, null);
+                if (err.code === 'ER_DUP_ENTRY') {
+                    // Duplicate entry error
+                    return callback(new Error('Email already exists'), null);
+                } else {
+                    // Other database error
+                    console.error('Error creating user:', err);
+                    return callback(err, null);
+                }
             }
             console.log('User created successfully');
             callback(null, results);
