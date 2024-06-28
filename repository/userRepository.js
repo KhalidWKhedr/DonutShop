@@ -12,7 +12,7 @@ class UserRepository {
             if (err) {
                 if (err.code === 'ER_DUP_ENTRY') {
                     // Duplicate entry error
-                    return callback(new Error('Email already exists'), null);
+                    return callback(new Error('Email or Number already exists, please login or recover account'), null);
                 } else {
                     // Other database error
                     console.error('Error creating user:', err);
