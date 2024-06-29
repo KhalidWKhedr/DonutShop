@@ -6,7 +6,6 @@ const DonutService = require('../services/donutService');
 router.get('/main-page/donuts', async (req, res) => {
     try {
         const donuts = await DonutService.getDonuts(); // Assuming DonutService.getDonuts() fetches data
-        console.log("here I am")
         res.render('donuts', { donuts }); // Render the EJS template with donuts data
     } catch (error) {
         console.error('Error fetching donuts:', error);
