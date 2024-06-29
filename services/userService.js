@@ -2,38 +2,35 @@ const userRepository = require('../repository/userRepository');
 const userModel = require('../models/userModel');
 
 class UserService {
-    static newUser(signupIdentifier, signupPassword, callback) {
-        const { error } = userModel.validate({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
-        if (error) {
-            return callback(new Error(error.details[0].message), null);
-        }
-        userRepository.newUser(signupIdentifier, signupPassword, (err, results) => {
-            if (err) {
-                return callback(err, null);
+    static async newUser(signupIdentifier, signupPassword) {
+        try {
+            const { error } = userModel.validate({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
+            if (error) {
+                throw new Error(error.details[0].message);
             }
-            callback(null, results);
-        });
+
+            const results = await userRepository.newUser(signupIdentifier, signupPassword);
+            return results;
+        } catch (error) {
+            throw error; // Let the caller handle the error
+        }
     }
 
-    static authenticateUser(identifier, password, callback) {
-        // Validate identifier and password (if necessary)
-        // Perform any additional logic or checks here
+    static async authenticateUser(identifier, password) {
+        try {
+            // Validate identifier and password (if necessary)
+            // Perform any additional logic or checks here
 
-        // Example: Using UserModel for validation (optional)
-        const { error } = userModel.validate({ IDENTIFIER: identifier, PASSWORD: password });
-        if (error) {
-            return callback(new Error(error.details[0].message), null);
-        }
-
-        // Call userRepository or database layer to authenticate user
-        userRepository.getUserLogin(identifier, (err, results) => {
-            if (err) {
-                return callback(err, null);
+            // Example: Using UserModel for validation (optional)
+            const { error } = userModel.validate({ IDENTIFIER: identifier, PASSWORD: password });
+            if (error) {
+                throw new Error(error.details[0].message);
             }
 
+            const results = await userRepository.getUserLogin(identifier);
             if (results.length === 0) {
                 console.log('User not found');
-                return callback(new Error('User not found'), null);
+                throw new Error('User not found');
             }
 
             const user = results[0]; // Assuming results is an array of user objects
@@ -41,12 +38,14 @@ class UserService {
 
             if (userPassword !== password) {
                 console.log('Authentication failed: Invalid credentials');
-                return callback(new Error('Invalid credentials'), null);
+                throw new Error('Invalid credentials');
             }
 
             console.log('Authentication successful');
-            callback(null, user);
-        });
+            return user;
+        } catch (error) {
+            throw error; // Let the caller handle the error
+        }
     }
 }
 

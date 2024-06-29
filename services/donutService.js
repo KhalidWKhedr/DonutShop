@@ -1,25 +1,19 @@
+// DonutService.js
 const DonutRepository = require('../repository/donutRepository');
 const donutModel = require('../models/donutModel');
 
 class DonutService {
-    static getDonuts() {
-        return new Promise((resolve, reject) => {
-            DonutRepository.getDonuts((err, donuts) => {
-                if (err) {
-                    return reject(err);
-                }
-
-                try {
-                    // Validate each donut
-                    donuts.forEach(donut => {
-                        donutModel.validate(donut);
-                    });
-                    resolve(donuts);
-                } catch (validationError) {
-                    reject(validationError);
-                }
+    static async getDonuts() {
+        try {
+            const donuts = await DonutRepository.getDonuts(); // Assuming getDonuts returns a promise
+            donuts.forEach(donut => {
+                donutModel.validate(donut);
             });
-        });
+            return donuts;
+        } catch (error) {
+            throw error;
+        }
     }
 }
+
 module.exports = DonutService;

@@ -1,19 +1,17 @@
-function loadForm() {
-    fetch('/main-page/signup-form.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(html => {
-            // Process the HTML content
-            console.log(html); // Log the HTML content to verify it's retrieved correctly
+async function loadForm() {
+    try {
+        const response = await fetch('/main-page/signup-form.html');
 
-            // Create modal structure and display it
-            createModal(html);
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const html = await response.text();
+        console.log(html); // Log the HTML content to verify it's retrieved correctly
+
+        // Create modal structure and display it
+        createModal(html);
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
 }

@@ -1,4 +1,3 @@
-// models/donutModel.js
 const Joi = require('joi');
 const DonutValidator = require('../middlewares/donutValidator');
 
@@ -24,20 +23,22 @@ class DonutModel {
         this.DONUT_IMAGE_PATH = donutData.DONUT_IMAGE_PATH;
     }
 
-    static validate(donutData) {
-        // Joi validation
+    static async validate(donutData) {
+        // Synchronous validation with Joi
         const { error } = donutSchema.validate(donutData);
         if (error) {
             throw new Error(`Validation error: ${error.details[0].message}`);
         }
 
-        // Custom validation using DonutValidator
-        DonutValidator.ValidateID(donutData)
-        DonutValidator.validateFlavor(donutData);
-        DonutValidator.validatePrice(donutData);
-        DonutValidator.validateQuantity(donutData);
-        DonutValidator.validateDescription(donutData);
-        DonutValidator.validateImagePath(donutData);
+        // Asynchronous custom validations
+        await Promise.all([
+            DonutValidator.validateID(donutData),
+            DonutValidator.validateFlavor(donutData),
+            DonutValidator.validatePrice(donutData),
+            DonutValidator.validateQuantity(donutData),
+            DonutValidator.validateDescription(donutData),
+            DonutValidator.validateImagePath(donutData)
+        ]);
 
         return true; // If all validations pass
     }

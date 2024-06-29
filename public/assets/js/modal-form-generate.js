@@ -31,23 +31,29 @@ function createModal(html) {
     modal.style.display = "flex";
 }
 
-function fetchForm(url, cssFile) {
-    fetch(url)
-        .then(response => response.text())
-        .then(html => {
-            createModal(html);
-            // Load the appropriate CSS file
-            const existingLink = document.getElementById('formStyles');
-            if (existingLink) {
-                existingLink.remove();
-            }
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = cssFile;
-            link.id = 'formStyles';
-            document.head.appendChild(link);
-        })
-        .catch(error => console.error('Error loading form:', error));
+async function fetchForm(url, cssFile) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const html = await response.text();
+        createModal(html);
+
+        // Load the appropriate CSS file
+        const existingLink = document.getElementById('formStyles');
+        if (existingLink) {
+            existingLink.remove();
+        }
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = cssFile;
+        link.id = 'formStyles';
+        document.head.appendChild(link);
+    } catch (error) {
+        console.error('Error loading form:', error);
+    }
 }
 
 // Get the buttons that open the modal
@@ -55,10 +61,10 @@ const signupBtn = document.getElementById("signUp");
 const loginBtn = document.getElementById("logIn");
 
 // When the user clicks the button, open the corresponding modal
-signupBtn.onclick = function() {
-    fetchForm('/main-page/signup-form', '/assets/css/modal-form.css');
+signupBtn.onclick = async function() {
+    await fetchForm('/main-page/signup-form', '/assets/css/modal-form.css');
 }
 
-loginBtn.onclick = function() {
-    fetchForm('/main-page/login-form', '/assets/css/modal-form.css');
+loginBtn.onclick = async function() {
+    await fetchForm('/main-page/login-form', '/assets/css/modal-form.css');
 }
