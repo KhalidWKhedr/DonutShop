@@ -1,20 +1,41 @@
-const express = require('express');
+const express = require('express')
+const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path');
+const userRoutes = require('../routes/userRoutes');
+const donutRoutes = require('../routes/donutRoutes');
+const errorHandler = require('../middleware/errorHandler');
 
-function configureApp(app) {
-    // Set EJS as the view engine
+function configure(app) {
+
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, '../views'));
 
-    // Serve static files from the 'public' directory for CSS, JS, and images
+    // Serve static files from the 'public' directory
     app.use(express.static(path.join(__dirname, '../public')));
 
-    // Middleware to parse JSON and urlencoded bodies
-    app.use(cors()); // Enable CORS for all routes
+    // Enable CORS
+    app.use(cors());
+
+    // Parse JSON and URL-encoded bodies
     app.use(express.json());
-    app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+    // Routes
+    app.use(userRoutes);
+    app.use(donutRoutes);
+
+    // Route to serve main-page.html
+    app.get('/main-page', (req, res) => {
+        const filePath = path.join(__dirname, '../views', 'main-page.html');
+        console.log(`Serving main-page.html from: ${filePath}`);
+        res.sendFile(filePath);
+    });
+
+    // Global error handler middleware
+    app.use(errorHandler);
 }
 
-module.exports = configureApp;
+module.exports = {
+    configure: configure
+};
