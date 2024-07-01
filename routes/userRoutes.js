@@ -55,9 +55,9 @@ router.post('/main-page/login-form', async (req, res, next) => {
     }
 });
 
-router.get('/main-page/account', async (req, res, next) => {
-    const sessionuser = req.session.user;
-    res.send({message: sessionuser})
+router.get('/main-page/account', async (req, res) => {
+    const sessionUser = req.session.user;
+    res.send(`<h1>Welcome, ${sessionUser.IDENTIFIER}!</h1>`);
 })
 module.exports = router;
 
