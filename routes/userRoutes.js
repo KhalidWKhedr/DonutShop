@@ -45,10 +45,19 @@ router.get('/main-page/login-form', async (req, res, next) => {
 // Handle login form submission with validation
 router.post('/main-page/login-form', async (req, res, next) => {
     try {
-        await userController.authenticateUser(req, res);
+        const user = await userController.authenticateUser(req, res)
+        console.log("this is user" , user)
+        req.session.user = user
+        await req.session.save();
+        console.log("Your are logged in");
     } catch (err) {
         next(err); // Pass error to the next middleware
     }
 });
 
+router.get('/main-page/account', async (req, res, next) => {
+    const sessionuser = req.session.user;
+    res.send({message: sessionuser})
+})
 module.exports = router;
+

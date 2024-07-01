@@ -24,9 +24,9 @@ class UserController {
             if (!user) {
                 return res.status(401).json({ error: 'Invalid credentials' });
             }
-
             console.log({ message: 'Login successful', user });
             res.redirect('/main-page');
+            return user;
         } catch (err) {
             res.status(401).json({ error: 'Invalid credentials' });
         }
