@@ -1,13 +1,22 @@
-const express = require('express')
+// appConfig.js
+const express = require('express');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const userRoutes = require('../routes/userRoutes');
-const donutRoutes = require('../routes/donutRoutes');
 const errorHandler = require('../middleware/errorHandler');
 
-function configure(app) {
+function configureApp(app) {
+    // Middleware setup
+    app.use(cookieParser());
+    app.use(session({
+        secret: 'your_secret_here',
+        resave: true,
+        saveUninitialized: true
+    }));
 
+    // View engine setup
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, '../views'));
 
@@ -21,21 +30,10 @@ function configure(app) {
     app.use(express.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    // Routes
-    app.use(userRoutes);
-    app.use(donutRoutes);
-
-    // Route to serve main-page.html
-    app.get('/main-page', (req, res) => {
-        const filePath = path.join(__dirname, '../views', 'main-page.html');
-        console.log(`Serving main-page.html from: ${filePath}`);
-        res.sendFile(filePath);
-    });
-
-    // Global error handler middleware
+    // Error handling middleware
     app.use(errorHandler);
 }
 
 module.exports = {
-    configure: configure
+    configureApp: configureApp
 };
