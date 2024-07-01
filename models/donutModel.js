@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const DonutValidator = require('../middlewares/donutValidator');
+const DonutValidator = require('../middleware/donutValidator');
 
 // Define Joi schema for donut data validation
 const donutSchema = Joi.object({
