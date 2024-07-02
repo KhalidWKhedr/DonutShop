@@ -1,14 +1,21 @@
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    background: #f0f0f0; /* Optional: for visual verification */
+    padding: 10px; /* Optional: for visual verification */
+}
+
 .button {
     background-color: #c93292;
     border: none;
     color: white;
     padding: 7px 17px;
-    text-align: right;
+    text-align: center;
     font-size: 12px;
     cursor: pointer;
-    margin-right: 0;
-    margin-left: auto;
-    display: block;
+    margin-left: 10px; /* Add spacing between buttons */
+    display: inline-block;
 }
 
 .button:hover {

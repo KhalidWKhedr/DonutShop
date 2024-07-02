@@ -28,4 +28,4 @@ app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/main-page`);
 });
 
-module.expo
+module.exports
