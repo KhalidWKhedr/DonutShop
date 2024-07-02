@@ -59,5 +59,6 @@ router.get('/main-page/account', async (req, res) => {
     const sessionUser = req.session.user;
     res.send(`<h1>Welcome, ${sessionUser.IDENTIFIER}!</h1>`);
 })
+
 module.exports = router;
 
