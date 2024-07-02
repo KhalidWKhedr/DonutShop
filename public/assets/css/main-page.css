@@ -12,14 +12,14 @@ body {
     line-height: 1.6;
 }
 
-/* Additional styles as needed */
-
+/* Additional styles for a container */
 .container {
     max-width: 960px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* Header styles */
 header {
     background-color: #333;
     color: #fff;
@@ -31,10 +31,12 @@ header h1 {
     font-size: 36px;
 }
 
+/* Main content styles */
 main {
     padding: 20px 0;
 }
 
+/* Hero section styles */
 .hero {
     text-align: center;
     padding: 80px 0;
@@ -50,6 +52,7 @@ main {
     margin-bottom: 20px;
 }
 
+/* Button styles */
 .button {
     display: inline-block;
     padding: 12px 24px;
@@ -66,6 +69,7 @@ main {
     background-color: #0056b3;
 }
 
+/* About and Contact section styles */
 .about,
 .contact {
     text-align: center;
@@ -83,6 +87,7 @@ main {
     font-size: 16px;
 }
 
+/* Footer styles */
 footer {
     background-color: #333;
     color: #fff;
