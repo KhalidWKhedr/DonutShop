@@ -5,7 +5,6 @@ const appConfig = require('./config/appConfig');
 const userRoutes = require('./routes/userRoutes');
 const donutRoutes = require('./routes/donutRoutes');
 const path = require('path');
-
 const app = express();
 
 // Configure the app using appConfig
@@ -28,4 +27,4 @@ app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/main-page`);
 });
 
-module.expo
+module.exports

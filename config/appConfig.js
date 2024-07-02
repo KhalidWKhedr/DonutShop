@@ -1,4 +1,3 @@
-// appConfig.js
 const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -14,6 +13,22 @@ function configureApp(app) {
         secret: 'your_secret_here',
         resave: true,
         saveUninitialized: true
+    }));
+
+    // Middleware to set correct Content-Type header for static files
+    app.use('/public', express.static(path.join(__dirname, '../public'), {
+        setHeaders: async (res, filePath) => {
+            try {
+                // Import mime dynamically
+                const { getType } = await import('mime');
+                const contentType = getType(filePath);
+                if (contentType) {
+                    res.setHeader('Content-Type', contentType);
+                }
+            } catch (error) {
+                console.error('Error setting Content-Type:', error.message);
+            }
+        },
     }));
 
     // View engine setup
