@@ -1,15 +1,18 @@
-/* Basic reset and styles */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* Set maximum width for the content */
+.content-container {
+    max-width: 960px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center align the content */
+    padding: 20px; /* Add padding for spacing */
 }
 
+/* Example styles for body or main container */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     line-height: 1.6;
 }
+
+/* Additional styles as needed */
 
 .container {
     max-width: 960px;
