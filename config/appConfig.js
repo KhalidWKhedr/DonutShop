@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('../middleware/errorHandler');
+const mime = require("mime-types")
 
 function configureApp(app) {
     // Middleware setup
@@ -19,9 +20,7 @@ function configureApp(app) {
     app.use('/public', express.static(path.join(__dirname, '../public'), {
         setHeaders: async (res, filePath) => {
             try {
-                // Import mime dynamically
-                const { getType } = await import('mime');
-                const contentType = getType(filePath);
+                const contentType = mime.lookup(filePath);
                 if (contentType) {
                     res.setHeader('Content-Type', contentType);
                 }

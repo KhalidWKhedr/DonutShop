@@ -3,36 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/assets/css/main-page.css" />
-    <title>Donut Shop</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/assets/css/main-page.css">
 </head>
 <body>
-<header>
-    <h1>Welcome to My Website</h1>
-</header>
-
+<div class="container">
+    <header>
+        <h1>Header</h1>
+        <div class="header-buttons">
+            <button id="signUp" class="button">Sign Up!</button>
+            <button id="logIn" class="button">Login!</button>
+        </div>
+    </header>
+</div>
+<div class="container center-buttons">
+    <a href="/main-page/donuts" id="openDonuts" class="button">Donuts!</a>
+</div>
 <div class="container">
     <main>
         <div class="hero">
-            <h2>Discover Delicious Donuts</h2>
-            <p>Explore our wide selection of donuts made with love!</p>
-            <a href="/main-page/donuts" class="button">Browse Donuts</a>
+            <h2>Hero Section</h2>
+            <p>Some text here.</p>
         </div>
-
-        <section class="about">
+        <div class="about">
             <h2>About Us</h2>
-            <p>Learn about our passion for baking and serving the best donuts in town.</p>
-        </section>
-
-        <section class="contact">
+            <p>Information about us.</p>
+        </div>
+        <div class="contact">
             <h2>Contact Us</h2>
-            <p>Get in touch with us for any inquiries or feedback.</p>
-        </section>
+            <p>Contact information.</p>
+        </div>
     </main>
 </div>
+<div class="container">
+    <footer>
+        <p>Footer content here.</p>
+    </footer>
+</div>
 
-<footer>
-    <p>&copy; 2024 Donut Shop. All rights reserved.</p>
-</footer>
+<div id="modalContainer"></div>
+<script src="/public/assets/js/modal-form-generate.js"></script>
+
 </body>
 </html>
