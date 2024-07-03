@@ -3,8 +3,22 @@ const connection = require('../config/database');
 
 class DonutRepository {
     static async getDonuts() {
-        const donutQuery = 'SELECT * FROM DONUTS';
-
+        const donutQuery = `
+            SELECT
+                dt.DONUT_TYPE_ID,
+                dt.DONUT_NAME,
+                dt.DONUT_FLAVOR,
+                dt.DONUT_IMAGE_PATH,
+                dt.DONUT_INGREDIENTS,
+                dt.DONUT_PRICE,
+                COUNT(d.DONUT_ID) AS DONUT_QUANTITY
+            FROM
+                DONUT_TYPE dt
+            LEFT JOIN
+                DONUTS d ON dt.DONUT_TYPE_ID = d.DONUT_TYPE_ID
+            GROUP BY
+                dt.DONUT_TYPE_ID;
+            `
         try {
             const queryAsync = util.promisify(connection.query).bind(connection);
             const results = await queryAsync(donutQuery);
