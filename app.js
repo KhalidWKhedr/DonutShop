@@ -10,9 +10,9 @@ const app = express();
 // Configure the app using appConfig
 appConfig.configureApp(app);
 
-// Route to serve main-page.html
+// Route to serve mainpage.html
 app.get('/main-page', (req, res) => {
-    const filePath = path.join(__dirname, 'views', 'main-page.html'); // Adjusted file path
+    const filePath = path.join(__dirname, 'views', 'mainpage.html'); // Adjusted file path
     console.log(`Serving main-page.html from: ${filePath}`);
     res.sendFile(filePath);
 });

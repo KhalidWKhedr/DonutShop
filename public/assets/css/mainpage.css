@@ -3,7 +3,7 @@
     width: 70%; /* Set the content to 70% of the available width */
     margin: 0 auto; /* Center align the content */
     padding: 20px; /* Add padding for spacing */
-    background-color : rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
 }
 
 /* Example styles for body or main container */
@@ -20,6 +20,10 @@ header {
     padding: 10px 0;
     position: relative;
     text-align: center;
+    border-bottom: 2px solid #ec6aaf; /* Add underline below header */
+    margin-bottom: 0; /* Remove margin below header */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Align items to the start and end */
 }
 
 header h1 {
@@ -29,15 +33,16 @@ header h1 {
 
 /* Container for top-right buttons */
 .header-buttons {
-    position: absolute;
-    /* top: 0px; */
+    position: fixed;
+    top: 0;
     right: 10px;
+    z-index: 1000; /* Ensure buttons are above other content */
 }
 
 /* Center the donuts button under the header */
 .center-buttons {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 80px; /* Adjust margin to make space for header */
 }
 
 /* Button styles */
@@ -60,6 +65,8 @@ header h1 {
 /* Main content styles */
 main {
     padding: 20px 0;
+    border-bottom: 2px solid #ec6aaf; /* Add underline below main content */
+    margin-bottom: 0; /* Remove margin below main content */
 }
 
 /* Hero section styles */
@@ -102,4 +109,5 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
+    border-top: 2px solid #ec6aaf; /* Add underline above footer */
 }
