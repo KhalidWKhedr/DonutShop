@@ -55,10 +55,15 @@ router.post('/main-page/login-form', async (req, res, next) => {
     }
 });
 
-router.get('/main-page/account', async (req, res) => {
-    const sessionUser = req.session.user;
-    res.send(`<h1>Welcome, ${sessionUser.IDENTIFIER}!</h1>`);
-})
+router.get('/main-page/account', async (req, res, next) => { // Add next as a parameter
+    try {
+        const user = req.session.user; // Fetch user data from session
+        console.log(user); // To verify the fetched data
+        res.render('account-setup-form', { user });
+    } catch (err) {
+        next(err); // Pass error to the next middleware
+    }
+});
 
 module.exports = router;
 

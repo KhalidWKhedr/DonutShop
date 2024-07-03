@@ -1,0 +1,39 @@
+<!-- views/account-setup-form.ejs -->
+<form id="account-setup-form" action="/main-page/account" method="POST">
+
+    <label id='title'>Account Setup</label>
+
+    <!-- Email or Phone (already registered) -->
+    <label for="identifier">Email or Phone:</label>
+    <input type="text" id="identifier" name="IDENTIFIER" value="<%= user.IDENTIFIER %>" disabled><br>
+    <!-- Hidden field to pass the identifier -->
+    <input type="hidden" name="IDENTIFIER" value="<%= user.IDENTIFIER %>">
+
+    <!-- Password (hidden) -->
+    <input type="hidden" id="password" name="PASSWORD" value="<%= user.PASSWORD %>"><br>
+
+    <!-- Additional Fields -->
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="F_NAME"><br>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="L_NAME"><br>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="ADDRESS"><br>
+
+
+    <label for="zip-code">Zip Code:</label>
+    <input type="text" id="zip-code" name="ZIPCODE"><br>
+
+    <label for="ccnumber">Credit Card Number:</label>
+    <input type="text" id="ccnumber" name="CCNUMBER"><br>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="DOB"><br>
+
+    <!-- Placeholder for validation messages -->
+    <div id="validation-messages"></div>
+
+    <input type="submit" value="Submit">
+</form>

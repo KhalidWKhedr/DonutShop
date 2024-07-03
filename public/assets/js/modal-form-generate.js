@@ -59,6 +59,8 @@ async function fetchForm(url, cssFile) {
 // Get the buttons that open the modal
 const signupBtn = document.getElementById("signUp");
 const loginBtn = document.getElementById("logIn");
+const accountsetup = document.getElementById("accountSetup");
+
 
 // When the user clicks the button, open the corresponding modal
 signupBtn.onclick = async function() {
@@ -67,4 +69,8 @@ signupBtn.onclick = async function() {
 
 loginBtn.onclick = async function() {
     await fetchForm('/main-page/login-form', '/assets/css/modal-form.css');
+}
+
+accountsetup.onclick = async function() {
+    await fetchForm('/main-page/account', '/assets/css/modal-form.css');
 }
