@@ -47,6 +47,18 @@ class UserService {
             throw error; // Let the caller handle the error
         }
     }
+    static async userAcount(F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB){
+        try {
+            const { error } = userModel.validate({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
+            if (error) {
+                throw new Error(error.details[0].message);
+            }
+        }
+        catch{
+        if (error)
+        throw error;
+        }
+    }
 }
 
 module.exports = UserService;

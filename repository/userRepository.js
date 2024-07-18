@@ -9,15 +9,14 @@ class UserRepository {
 
         try {
             const queryAsync = util.promisify(connection.query).bind(connection);
-            const results = await queryAsync(query, values);
-            console.log('User created successfully');
-            return results;
+            return await queryAsync(query, values);
         } catch (err) {
             if (err.code === 'ER_DUP_ENTRY') {
                 // Duplicate entry error
+                console.log('Error:' + err.message);
                 throw new Error('Email or Number already exists, please login or recover account');
             } else {
-                // Other database error
+                console.log('Error: ' + err.message);
                 console.error('Error creating user:', err);
                 throw err;
             }
@@ -45,6 +44,16 @@ class UserRepository {
             throw err;
         }
     }
+    static async userAcount(F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB){
+        console.log('Account information to register:', F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB);
+        const userAccount = `
+        INSERT INTO ACCOUNTS 
+            (F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB) 
+        VALUES 
+            (?, ?, ?, ?, ?, ?, ?)
+        `;
+    }
+
 }
 
 module.exports = UserRepository;
