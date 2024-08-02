@@ -70,8 +70,6 @@ router.post('/main-page/account', async (req, res, next) => {
     const userSessionData = req.session.user;
     try {
             const account_info = await userController.userAccount(userSessionData, req, res)
-            console.log(account_info)
-            console.log("this is account information" , account_info)
             console.log("Your appended account information");
     } catch (err) {
         next(err); // Pass error to the next middleware

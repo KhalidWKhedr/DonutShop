@@ -3,9 +3,9 @@ const connection = require('../config/database');
 
 class UserRepository {
 
-    static async newUser(signupEmail, signupPassword) {
+    static async newUser(SIGNUPEMAIL, SIGNUPPASSWORD) {
         const newuserquery = 'INSERT INTO ACCOUNTS (EMAIL, PASSWORD) VALUES (?, ?)';
-        const values = [signupEmail, signupPassword];
+        const values = [SIGNUPEMAIL, SIGNUPPASSWORD];
 
         try {
             const queryAsync = util.promisify(connection.query).bind(connection);
@@ -23,13 +23,13 @@ class UserRepository {
         }
     }
 
-    static async getUserLogin(email) {
-        console.log('Email to query:', email); // Check what is being passed to the query
+    static async getUserLogin(EMAIL) {
+        console.log('Email to query:', EMAIL); // Check what is being passed to the query
         const getUserQuery = 'SELECT * FROM ACCOUNTS WHERE ACCOUNTS.EMAIL = ?';
 
         try {
             const queryAsync = util.promisify(connection.query).bind(connection);
-            const results = await queryAsync(getUserQuery, email);
+            const results = await queryAsync(getUserQuery, EMAIL);
 
             if (results.length === 0) {
                 console.log('User not found');
