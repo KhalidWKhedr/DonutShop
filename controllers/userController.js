@@ -2,11 +2,11 @@ const userService = require('../services/userService');
 
 class UserController {
     static async newUser(req, res) {
-        const {SIGNUPIDENTIFIER, SIGNUPPASSWORD} = req.body;
+        const {SIGNUPEMAIL, SIGNUPPASSWORD} = req.body;
         console.log(req.body); // For debugging purposes
 
         try {
-            const results = await userService.newUser(SIGNUPIDENTIFIER, SIGNUPPASSWORD);
+            const results = await userService.newUser(SIGNUPEMAIL, SIGNUPPASSWORD);
             res.status(201).json({message: 'User created successfully', data: results});
         } catch (err) {
             res.status(400).json({error: err.message});
@@ -14,14 +14,14 @@ class UserController {
     }
 
     static async authenticateUser(req, res) {
-        const {IDENTIFIER, PASSWORD} = req.body;
+        const {EMAIL, PASSWORD} = req.body;
         console.log(req.body);
-        if (!IDENTIFIER || !PASSWORD) {
-            return res.status(400).json({error: 'IDENTIFIER and PASSWORD are required'});
+        if (!EMAIL || !PASSWORD) {
+            return res.status(400).json({error: 'EMAIL and PASSWORD are required'});
         }
 
         try {
-            const user = await userService.authenticateUser(IDENTIFIER, PASSWORD);
+            const user = await userService.authenticateUser(EMAIL, PASSWORD);
             console.log(req.body)
             if (!user) {
                 return res.status(401).json({error: 'Invalid credentials'});

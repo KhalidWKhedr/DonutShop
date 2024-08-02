@@ -1,12 +1,12 @@
 const { body, validationResult } = require('express-validator');
 
 const validateUser = [
-    body('IDENTIFIER')
-        .notEmpty().withMessage('Identifier is required')
+    body('EMAIL')
+        .notEmpty().withMessage('Email is required')
         .custom(async (value) => {
             // Check if value is an email or a number
             if (!value.match(/^[0-9]+$/) && !value.match(/^\S+@\S+\.\S+$/)) {
-                throw new Error('Identifier must be an email or a number');
+                throw new Error('Email must be an email or a number');
             }
             // Simulate an async operation if needed, for example, a database check
             // await someAsyncCheck(value);

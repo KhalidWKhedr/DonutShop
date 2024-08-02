@@ -2,10 +2,7 @@ const Joi = require('joi');
 
 // Define Joi schema for user login validation
 const userLoginSchema = Joi.object({
-    IDENTIFIER: Joi.alternatives().try(
-        Joi.string().email(),
-        Joi.string().pattern(/^[0-9]+$/)
-    ).required(),
+    EMAIL: Joi.string().email().required(),
     PASSWORD: Joi.string().required(),
 });
 
@@ -22,7 +19,7 @@ const userAccountSchema = Joi.object({
 
 class UserModel {
     constructor(userData) {
-        this.IDENTIFIER = userData.IDENTIFIER;
+        this.EMAIL = userData.EMAIL;
         this.PASSWORD = userData.PASSWORD;
         this.F_NAME = userData.F_NAME;
         this.L_NAME = userData.L_NAME;

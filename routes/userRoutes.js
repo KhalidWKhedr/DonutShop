@@ -57,8 +57,8 @@ router.post('/main-page/login-form', async (req, res, next) => {
 
 router.get('/main-page/account', async (req, res, next) => { // Add next as a parameter
     try {
-        const { ACCOUNT_ID, IDENTIFIER, PASSWORD } = req.session.user || {};
-        const user = { ACCOUNT_ID, IDENTIFIER, PASSWORD };
+        const { ACCOUNT_ID, EMAIL, PASSWORD } = req.session.user || {};
+        const user = { ACCOUNT_ID, EMAIL, PASSWORD };
         console.log('Session User:', user); // Verify the filtered user object
         res.render('account-setup-form', { user });
     } catch (err) {

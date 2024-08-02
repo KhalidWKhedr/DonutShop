@@ -2,31 +2,31 @@ const userRepository = require('../repository/userRepository');
 const userModel = require('../models/userModel');
 
 class UserService {
-    static async newUser(signupIdentifier, signupPassword) {
+    static async newUser(email, signupPassword) {
         try {
-            const { error } = userModel.validateLogin({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
+            const { error } = userModel.validateLogin({ EMAIL: email, PASSWORD: signupPassword });
             if (error) {
                 throw new Error(error.details[0].message);
             }
-            const results = await userRepository.newUser(signupIdentifier, signupPassword);
+            const results = await userRepository.newUser(email, signupPassword);
             return results;
         } catch (error) {
             throw error; // Let the caller handle the error
         }
     }
 
-    static async authenticateUser(identifier, password) {
+    static async authenticateUser(email, password) {
         try {
-            // Validate identifier and password (if necessary)
+            // Validate email and password (if necessary)
             // Perform any additional logic or checks here
 
             // Example: Using UserModel for validation (optional)
-            const { error } = userModel.validateLogin({ IDENTIFIER: identifier, PASSWORD: password });
+            const { error } = userModel.validateLogin({ EMAIL: email, PASSWORD: password });
             if (error) {
                 throw new Error(error.details[0].message);
             }
 
-            const results = await userRepository.getUserLogin(identifier);
+            const results = await userRepository.getUserLogin(email);
             if (results.length === 0) {
                 console.log('User not found');
                 throw new Error('User not found');
