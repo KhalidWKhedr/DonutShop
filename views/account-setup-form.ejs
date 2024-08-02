@@ -1,36 +1,37 @@
-<!-- views/account-setup-form.ejs -->
 <form id="account-setup-form" action="/main-page/account" method="POST">
 
     <label id='title'>Account Setup</label>
 
-    <!-- Email or Phone (already registered) -->
-    <label for="identifier">Email or Phone:</label>
-    <input type="text" id="identifier" name="IDENTIFIER" value="<%= user.IDENTIFIER %>" disabled><br>
-    <!-- Hidden field to pass the identifier -->
-    <input type="hidden" name="IDENTIFIER" value="<%= user.IDENTIFIER %>">
+    <!-- Email Field -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="EMAIL" value="<%= user.IDENTIFIER %>" <% if (!isEmail) { %> disabled <% } %>><br>
 
-    <!-- Password (hidden) -->
+    <!-- Phone Number Field -->
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="PHONE_NUMBER" value="<%= user.IDENTIFIER %>" <% if (isEmail) { %> disabled <% } %>><br>
+
+    <!-- Hidden fields to pass the identifier and password -->
+    <input type="hidden" id="identifier-hidden" name="IDENTIFIER" value="<%= user.IDENTIFIER %>">
     <input type="hidden" id="password" name="PASSWORD" value="<%= user.PASSWORD %>"><br>
 
     <!-- Additional Fields -->
     <label for="firstname">First Name:</label>
-    <input type="text" id="firstname" name="F_NAME"><br>
+    <input type="text" id="firstname" name="F_NAME" value="<%= user.F_NAME || '' %>"><br>
 
     <label for="lastname">Last Name:</label>
-    <input type="text" id="lastname" name="L_NAME"><br>
+    <input type="text" id="lastname" name="L_NAME" value="<%= user.L_NAME || '' %>"><br>
 
     <label for="address">Address:</label>
-    <input type="text" id="address" name="ADDRESS"><br>
-
+    <input type="text" id="address" name="ADDRESS" value="<%= user.ADDRESS || '' %>"><br>
 
     <label for="zip-code">Zip Code:</label>
-    <input type="text" id="zip-code" name="ZIPCODE"><br>
+    <input type="text" id="zip-code" name="ZIP_CODE" value="<%= user.ZIP_CODE || '' %>"><br>
 
     <label for="ccnumber">Credit Card Number:</label>
-    <input type="text" id="ccnumber" name="CCNUMBER"><br>
+    <input type="text" id="ccnumber" name="CC_NUMBER" value="<%= user.CC_NUMBER || '' %>"><br>
 
     <label for="dob">Date of Birth:</label>
-    <input type="date" id="dob" name="DOB"><br>
+    <input type="date" id="dob" name="DOB" value="<%= user.DOB || '' %>"><br>
 
     <!-- Placeholder for validation messages -->
     <div id="validation-messages"></div>

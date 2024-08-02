@@ -4,11 +4,10 @@ const userModel = require('../models/userModel');
 class UserService {
     static async newUser(signupIdentifier, signupPassword) {
         try {
-            const { error } = userModel.validate({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
+            const { error } = userModel.validateLogin({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
             if (error) {
                 throw new Error(error.details[0].message);
             }
-
             const results = await userRepository.newUser(signupIdentifier, signupPassword);
             return results;
         } catch (error) {
@@ -22,7 +21,7 @@ class UserService {
             // Perform any additional logic or checks here
 
             // Example: Using UserModel for validation (optional)
-            const { error } = userModel.validate({ IDENTIFIER: identifier, PASSWORD: password });
+            const { error } = userModel.validateLogin({ IDENTIFIER: identifier, PASSWORD: password });
             if (error) {
                 throw new Error(error.details[0].message);
             }
@@ -47,16 +46,15 @@ class UserService {
             throw error; // Let the caller handle the error
         }
     }
-    static async userAcount(F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB){
+    static async userAccount(fname, lname, address, phone_number, zip_code, cc_number, dob){
         try {
-            const { error } = userModel.validate({ IDENTIFIER: signupIdentifier, PASSWORD: signupPassword });
+            const { error } = userModel.validateAccount({fname, lname, address, phone_number, zip_code, cc_number, dob});
             if (error) {
                 throw new Error(error.details[0].message);
             }
-        }
-        catch{
-        if (error)
-        throw error;
+            return await userRepository.userAcount(fname, lname, address, phone_number, zip_code, cc_number, dob);
+        } catch (error) {
+            throw error; // Let the caller handle the error
         }
     }
 }

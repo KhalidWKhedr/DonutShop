@@ -4,12 +4,12 @@ const connection = require('../config/database');
 class UserRepository {
 
     static async newUser(signupIdentifier, signupPassword) {
-        const query = 'INSERT INTO ACCOUNTS (IDENTIFIER, PASSWORD) VALUES (?, ?)';
+        const newuserquery = 'INSERT INTO ACCOUNTS (IDENTIFIER, PASSWORD) VALUES (?, ?)';
         const values = [signupIdentifier, signupPassword];
 
         try {
             const queryAsync = util.promisify(connection.query).bind(connection);
-            return await queryAsync(query, values);
+            return await queryAsync(newuserquery, values);
         } catch (err) {
             if (err.code === 'ER_DUP_ENTRY') {
                 // Duplicate entry error
@@ -44,16 +44,19 @@ class UserRepository {
             throw err;
         }
     }
-    static async userAcount(F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB){
-        console.log('Account information to register:', F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB);
-        const userAccount = `
-        INSERT INTO ACCOUNTS 
-            (F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB) 
-        VALUES 
-            (?, ?, ?, ?, ?, ?, ?)
-        `;
-    }
 
+    static async userAcount(F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB) {
+        console.log('Account information to register:', F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB);
+        const userAccountInsert = 'INSERT INTO ACCOUNTS (F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB) VALUES (?,?,?,?,?,?,?)';
+        try {
+            const queryAsync = util.promisify(connection.query).bind(connection);
+            return await queryAsync(userAccountInsert)
+        } catch (err) {
+            console.error('Error inserting user information:', err);
+            throw err;
+        }
+    }
 }
+
 
 module.exports = UserRepository;

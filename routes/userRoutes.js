@@ -57,13 +57,26 @@ router.post('/main-page/login-form', async (req, res, next) => {
 
 router.get('/main-page/account', async (req, res, next) => { // Add next as a parameter
     try {
-        const user = req.session.user; // Fetch user data from session
-        console.log(user); // To verify the fetched data
+        const { ACCOUNT_ID, IDENTIFIER, PASSWORD } = req.session.user || {};
+        const user = { ACCOUNT_ID, IDENTIFIER, PASSWORD };
+        console.log('Session User:', user); // Verify the filtered user object
         res.render('account-setup-form', { user });
     } catch (err) {
         next(err); // Pass error to the next middleware
     }
 });
 
+router.post('/main-page/account', async (req, res, next) => {
+    const user = req.session.user
+    try {
+            const user = req.session.user
+            const account_info = await userController.userAccount(req, res)
+            console.log(account_info)
+            console.log("this is account information" , account_info)
+            console.log("Your appended account information");
+    } catch (err) {
+        next(err); // Pass error to the next middleware
+    }
+});
 module.exports = router;
 
