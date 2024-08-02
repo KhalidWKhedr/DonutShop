@@ -3,9 +3,9 @@ const connection = require('../config/database');
 
 class UserRepository {
 
-    static async newUser(email, signupPassword) {
+    static async newUser(signupEmail, signupPassword) {
         const newuserquery = 'INSERT INTO ACCOUNTS (EMAIL, PASSWORD) VALUES (?, ?)';
-        const values = [email, signupPassword];
+        const values = [signupEmail, signupPassword];
 
         try {
             const queryAsync = util.promisify(connection.query).bind(connection);

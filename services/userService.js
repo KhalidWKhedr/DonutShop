@@ -2,14 +2,13 @@ const userRepository = require('../repository/userRepository');
 const userModel = require('../models/userModel');
 
 class UserService {
-    static async newUser(email, signupPassword) {
+    static async newUser(signupemail, signupPassword) {
         try {
-            const { error } = userModel.validateLogin({ EMAIL: email, PASSWORD: signupPassword });
+            const { error } = userModel.validateLogin({ EMAIL: signupemail, PASSWORD: signupPassword });
             if (error) {
                 throw new Error(error.details[0].message);
             }
-            const results = await userRepository.newUser(email, signupPassword);
-            return results;
+            return await userRepository.newUser(signupemail, signupPassword);
         } catch (error) {
             throw error; // Let the caller handle the error
         }
