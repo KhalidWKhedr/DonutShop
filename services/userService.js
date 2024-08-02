@@ -45,13 +45,15 @@ class UserService {
             throw error; // Let the caller handle the error
         }
     }
-    static async userAccount(fname, lname, address, phone_number, zip_code, cc_number, dob){
+    static async userAccount(accountid, fname, lname, address, phone_number, zip_code, cc_number, dob){
         try {
-            const { error } = userModel.validateAccount({fname, lname, address, phone_number, zip_code, cc_number, dob});
+            const { error } = userModel.validateAccount(
+                {ACCOUNT_ID: accountid, F_NAME: fname, L_NAME: lname, ADDRESS: address,
+                    PHONE_NUMBER: phone_number, ZIP_CODE: zip_code, CC_NUMBER: cc_number, DOB: dob});
             if (error) {
                 throw new Error(error.details[0].message);
             }
-            return await userRepository.userAcount(fname, lname, address, phone_number, zip_code, cc_number, dob);
+            return await userRepository.userAcount(userid, fname, lname, address, phone_number, zip_code, cc_number, dob);
         } catch (error) {
             throw error; // Let the caller handle the error
         }

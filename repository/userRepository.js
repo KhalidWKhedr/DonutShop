@@ -45,18 +45,21 @@ class UserRepository {
         }
     }
 
-    static async userAcount(F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB) {
-        console.log('Account information to register:', F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB);
-        const userAccountInsert = 'INSERT INTO ACCOUNTS (F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB) VALUES (?,?,?,?,?,?,?)';
+    static async updateUserAccount(ACCOUNT_ID, F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB) {
+        console.log('Account information to update:', F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB);
+        const userAccountUpdate = 'UPDATE ACCOUNTS SET F_NAME = ?, L_NAME = ?, ADDRESS = ?, PHONE_NUMBER = ?, ZIP_CODE = ?, CC_NUMBER = ?, DOB = ? WHERE ACCOUNT_ID = ?';
+        const accountValues = [F_NAME, L_NAME, ADDRESS, PHONE_NUMBER, ZIP_CODE, CC_NUMBER, DOB, ACCOUNT_ID]
+
         try {
             const queryAsync = util.promisify(connection.query).bind(connection);
-            return await queryAsync(userAccountInsert)
+            // Pass parameters to the query
+            return await queryAsync(userAccountUpdate, accountValues);
         } catch (err) {
-            console.error('Error inserting user information:', err);
+            console.error('Error updating user information:', err);
             throw err;
         }
     }
 }
 
 
-module.exports = UserRepository;
+    module.exports = UserRepository;

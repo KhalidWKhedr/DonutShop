@@ -67,10 +67,9 @@ router.get('/main-page/account', async (req, res, next) => { // Add next as a pa
 });
 
 router.post('/main-page/account', async (req, res, next) => {
-    const user = req.session.user
+    const userSessionData = req.session.user;
     try {
-            const user = req.session.user
-            const account_info = await userController.userAccount(req, res)
+            const account_info = await userController.userAccount(userSessionData, req, res)
             console.log(account_info)
             console.log("this is account information" , account_info)
             console.log("Your appended account information");
