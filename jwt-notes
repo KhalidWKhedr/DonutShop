@@ -1,0 +1,5 @@
+what you can do is have the login endpoint return a JWT that contains the user id. you would set this as an http-only cookie (safest way). then for each subsequent request to other endpoints, the browser sends this cookie. you have a middleware that intercepts the requests and validates the JWT. if invalid, it rejects the request and redirects to login. if valid, it allows the request to go through. the middleware could extract the user's id from the jwt and attaches it to the request as some attribute or added to session. now that you have the user id, you would use it to find the user in the db for updating/deleting data. (assuming the request provided updated info)
+user logins in, the login endpoint creates a json payload which is added to a JWT and signed, the jwt is set as an http only cookie
+browser now sends this jwt with each request
+some endpoint like /user/account would receive this jwt as a cookie which you decode and validate
+if valid, the id is added to the session/request and the request proceeds through the controller -> service -> repo
